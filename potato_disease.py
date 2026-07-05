@@ -8,7 +8,7 @@ class_names = [
 ]
 
 def predict_image(img_path):
-    model = tf.keras.models.load_model('saved_models/final/final_model.h5')
+    model = tf.keras.models.load_model('saved_models/final_model.h5')
     img = tf.keras.utils.load_img(img_path, target_size=IMAGE_SIZE)
     img_array = tf.keras.utils.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)

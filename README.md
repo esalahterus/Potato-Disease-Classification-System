@@ -35,16 +35,13 @@ potato-disease-classification-system-main/
 │   ├── .env                      # API URL config
 │   ├── package-lock.json
 │   └── package.json              # React dependencies
-├── saved_models/
-│   ├── final/                    # Final trained model
-│   └── phase1/                   # Phase 1 model checkpoint
+├── saved_models/                 # Trained models
 ├── training/
 │   ├── dataset/                  # Training images per class
+|   ├── results/                  # Model evaluation results
 │   ├── testing_data/             # Testing images for Standalone prediction
-│   ├── confusion_matrix.png      # Model evaluation result
 │   ├── requirements.txt          # Python training dependencies
 │   ├── training.ipynb            # Training notebook
-│   └── training_history.png      # Loss & accuracy plot
 ├── .gitignore
 ├── README.md
 └── potato_disease.py             # Standalone prediction script

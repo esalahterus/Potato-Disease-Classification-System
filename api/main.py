@@ -21,8 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load model with absolute path
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "../saved_models/final/final_model.h5")
+# Load model
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "../saved_models/final_model.h5")
 try:
     MODEL = tf.keras.models.load_model(MODEL_PATH)
 except Exception as e:
@@ -43,11 +43,9 @@ def read_file_as_image(data) -> np.ndarray:
     try:
         image = Image.open(BytesIO(data))
         
-        # Convert to RGB if needed (handle RGBA, grayscale, etc.)
         if image.mode != 'RGB':
             image = image.convert('RGB')
         
-        # Resize to model input size
         image = image.resize(IMAGE_SIZE, Image.Resampling.LANCZOS)
         
         image_array = np.array(image)
@@ -60,18 +58,15 @@ async def predict(
     file: UploadFile = File(...)
 ):
     try:
-        # Validate file type
         if not file.content_type.startswith('image/'):
             raise HTTPException(
                 status_code=400,
                 detail="File must be an image"
             )
         
-        # Read and process image
         image = read_file_as_image(await file.read())
         img_batch = np.expand_dims(image, 0)
         
-        # Make prediction
         predictions = MODEL.predict(img_batch, verbose=0)
         
         predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
