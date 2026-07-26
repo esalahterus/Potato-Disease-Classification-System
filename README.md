@@ -203,3 +203,9 @@ result = predict_image('path/to/your/image.jpg')
   "confidence": 0.9731
 }
 ```
+
+## Author
+
+**Esa Adya Syawal**
+
+GitHub: https://github.com/esalahterus
